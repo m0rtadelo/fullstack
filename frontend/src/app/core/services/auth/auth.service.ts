@@ -12,4 +12,12 @@ export class AuthService {
   public isLogged(): boolean {
     return !!this.user;
   }
+
+  public login(username = 'admin'): void {
+    this.user = username;
+  }
+
+  public getUser(): string {
+    return this.user;
+  }
 }
