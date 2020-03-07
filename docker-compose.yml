@@ -1,12 +1,23 @@
-version "3.2"
+version: "3.2"
 services:
   mongodb:
     image: mongo:4.2
+    container_name: mongodb
     restart: always
-    ports: "27017-27019:27017-27019"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: mongopassword
+      MONGO_INITDB_DATABASE: fullstack
+    ports:
+    - "27017-27019:27017-27019"
     networks:
       - backend
       - frontend
+    volumes:
+    - data-volume:/data/db
+    - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 networks:
   frontend:
   backend:
+volumes:
+  data-volume:
