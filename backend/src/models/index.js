@@ -1,3 +1,17 @@
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://user:password@localhost/fullstack', {useNewUrlParser: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected!')
+});
+var UsersSchema = new mongoose.Schema({});
+var Users = mongoose.model('users', new mongoose.Schema({}));
+var Roles = mongoose.model('roles', new mongoose.Schema({}));
+async function getUsers() {
+  return await Users.find({});
+}
 let users = {
     1: {
       id: '1',
@@ -23,6 +37,6 @@ let users = {
   };
   
 module.exports = {
-    users,
+    users: getUsers(),
     messages,
   };
