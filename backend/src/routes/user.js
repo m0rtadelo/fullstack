@@ -4,14 +4,17 @@ import utils from '../utils';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  if (utils.isAuthorized(req, res)) {
-    return res.send(Object.values(await req.context.models.users));
+  if (utils.isAuthorized(req, res)) {8
+    return res.send(Object.values(await req.context.models.users.get()));
   }
 });
 
-router.get('/:userId', (req, res) => {
+router.get('/:userId', async (req, res) => {
   if (utils.isAuthorized(req, res)) {
-    const item = req.context.models.users[req.params.userId];
+    let item;
+    try {
+      item = Object.values(await req.context.models.users.get(req.params.userId));
+    } catch (error) {}
     if(utils.isValidItem(item, res)) {
       return res.send(item);
     }

@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime.js";
 import 'dotenv/config';
 import express  from 'express'
 import uuid from 'uuid/v4';

@@ -15,7 +15,11 @@ db.roles.insertMany([
   { name: "user", admin: false, read: true, write: true },
   { name: "ro", admin: false, read: true, write: false }
 ]);
-db.users.insert({ user: "admin", pwd: "", roles: ["admin"] });
+db.users.insertMany([
+    { user: "admin", pwd: "", roles: ["admin"] },
+    { user: "user", pwd: "", roles: ["user"] }
+]);
+
 db.boxes.insertMany([
 { name: "BOX01", description: "Big box blue" },
 { name: "BOX02", description: "Big box red" }
