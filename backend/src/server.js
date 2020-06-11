@@ -4,6 +4,7 @@ import express  from 'express'
 import uuid from 'uuid/v4';
 import session from 'express-session';
 
+import utils from './utils';
 import routes from './routes';
 import models from './models';
 
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   req.context = {
     models,
-    me: 'admin',
+    me: undefined,
   }
   next();
 });
@@ -32,6 +33,7 @@ app.use(session({
 
 // routes
 app.use('/login', routes.login);
+app.use((req, res, next) => !utils.isAuthorized(req, res) || next())
 app.use('/users', routes.user);
 
 // listen

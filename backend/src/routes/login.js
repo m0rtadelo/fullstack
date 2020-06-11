@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
 
 router.delete('/', (req, res) => {
     if (utils.isValidItem(req.session.user, res)) {
+        req.session.user = undefined;
         return res.send(req.session.destroy());
     }
 })
