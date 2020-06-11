@@ -7,9 +7,11 @@ services:
     command: npm run up
     volumes:
       - ./backend:/usr/app/
-     # - /usr/app/node_modules
     ports:
       - "3000:3000"
+    networks:
+      - backend
+      - frontend
   mongodb:
     image: mongo:4.2
     container_name: mongodb
@@ -22,7 +24,6 @@ services:
     - "27017-27019:27017-27019"
     networks:
       - backend
-      - frontend
     volumes:
     - data-volume:/data/db
     - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro

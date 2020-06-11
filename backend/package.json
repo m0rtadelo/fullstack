@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "nyc mocha --require @babel/register src/**/*.spec.js --exit",
-    "start": "nodemon --exec babel-node src/server.js",
-    "up": "node --require @babel/register src/server.js"
+    "start": "DB_HOST=localhost nodemon --exec babel-node src/server.js",
+    "up": "DB_HOST=mongodb node --require @babel/register src/server.js"
   },
   "keywords": [
     "nodejs",
