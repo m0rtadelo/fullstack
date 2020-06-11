@@ -16,4 +16,7 @@ GET http://localhost:3000/users
 GET http://localhost:3000/users/5edffe78958b7efce73f546f
 
 ###
-GET http://localhost:3000/users/find/{name:'admin'}
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{ "user":"user"}
