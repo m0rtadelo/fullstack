@@ -1,4 +1,5 @@
 import express from 'express';
+import utils from '../utils';
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
 router.get('/:userId', async (req, res) => {
     let item;
     try {
-      item = Object.values(await req.context.models.users.get(req.params.userId));
+      item = Object.values(await req.context.models.users.get(req.params.userId))[0];
     } catch (error) {}
     if(utils.isValidItem(item, res)) {
       return res.send(item);
