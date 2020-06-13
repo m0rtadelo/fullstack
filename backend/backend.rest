@@ -10,6 +10,9 @@ Content-Type: application/json
 DELETE http://localhost:3000/login
 
 ###
+GET http://localhost:3000/items
+
+###
 GET http://localhost:3000/users
 
 ###

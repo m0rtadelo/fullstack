@@ -1,7 +1,9 @@
-import user from './user';
+import users from './users';
 import login from './login';
+import items from './items';
 
 export default {
-    user,
+    users,
+    items,
     login,
 }
