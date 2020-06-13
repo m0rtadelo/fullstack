@@ -1,3 +1,4 @@
+// Connection user
 db.createUser(
         {
             user: "user",
@@ -10,21 +11,15 @@ db.createUser(
             ]
         }
 );
-db.roles.insertMany([
-  { name: "admin", admin: true, read: true, write: true },
-  { name: "user", admin: false, read: true, write: true },
-  { name: "ro", admin: false, read: true, write: false }
-]);
+
+// Application users
 db.users.insertMany([
-    { user: "admin", pwd: "", roles: ["admin"] },
-    { user: "user", pwd: "", roles: ["user"] }
+    { user: "admin", pwd: "1234", admin: true, read: true, write: true },
+    { user: "user", pwd: "1234", admin: false, read: true, write: true },
+    { user: "ro", pwd: "1234", admin: false, read: true, write: false }
 ]);
 
-db.boxes.insertMany([
-{ name: "BOX01", description: "Big box blue" },
-{ name: "BOX02", description: "Big box red" }
-]);
 db.items.insertMany([
-{ name: "House music vol.1", box: "BOX01", description: "House music live volumen 1" },
-{ name: "House music vol.2", box: "BOX01", description: "House music live volumen 2" }
+{ name: "House music vol.1", box: { name: "BOX01", description: "Big box blue" }, description: "House music live volumen 1" },
+{ name: "House music vol.2", box: { name: "BOX02", description: "Big box red" }, description: "House music live volumen 2" }
 ]);

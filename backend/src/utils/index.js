@@ -14,7 +14,17 @@ function isAuthorized(req, res) {
     return true
 }
 
+function isAdmin(req, res) {
+    if(req.session.user && req.session.user.admin) {
+        return true
+    } else {
+        res.sendStatus(403)
+        return false
+    }
+}
+
 export default {
     isValidItem: isValidItem,
-    isAuthorized: isAuthorized
+    isAuthorized: isAuthorized,
+    isAdmin: isAdmin
 }

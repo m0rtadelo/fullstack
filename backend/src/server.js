@@ -34,6 +34,7 @@ app.use(session({
 // routes
 app.use('/login', routes.login);
 app.use((req, res, next) => !utils.isAuthorized(req, res) || next())
+app.use((req, res, next) => !utils.isAdmin(req, res) || next())
 app.use('/users', routes.user);
 
 // listen
