@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 router.post('/',async (req, res) => {
     let item;
     try {
-      item = ((await req.context.models.users.find({user: req.body.user}))[0]);
+      item = ((await req.context.models.users.login({user: req.body.user}))[0]);
     } catch (error) {}
     if(item) {
         const { pwd, ...user } = JSON.parse(JSON.stringify(item));

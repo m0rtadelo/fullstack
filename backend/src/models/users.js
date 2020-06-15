@@ -1,14 +1,18 @@
 import mongoose from '../database.js'
+import utils from '../utils'
 
-var db = mongoose.model('users', new mongoose.Schema({}));
+var userSchema = new mongoose.Schema({})
+userSchema.statics.get = utils.get
 
+var db = mongoose.model('users', userSchema);
 const Users = {
-    get: async (id) => {
-      return await db.find(id ? {_id: id } : id);      
-    },
-    find: async (query) => {
-      return await db.find(query);
-    }
+
+  get: async (query, offset, limit) => {
+    return await db.get(query, offset, limit);
+  },
+  login: async (query) => {
+    return await db.find(query);
   }
-  
-  export default Users
+}
+
+export default Users

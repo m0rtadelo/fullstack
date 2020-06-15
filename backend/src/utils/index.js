@@ -1,5 +1,5 @@
 function isValidItem(item, res) {
-    if(!item) {
+    if (!item) {
         res.sendStatus(404)
         return false
     }
@@ -7,7 +7,7 @@ function isValidItem(item, res) {
 }
 
 function isAuthorized(req, res) {
-    if(!req.session.user) {
+    if (!req.session.user) {
         res.sendStatus(401)
         return false
     }
@@ -15,7 +15,7 @@ function isAuthorized(req, res) {
 }
 
 function isAdmin(req, res) {
-    if(req.session.user && req.session.user.admin) {
+    if (req.session.user && req.session.user.admin) {
         return true
     } else {
         res.sendStatus(403)
@@ -23,8 +23,62 @@ function isAdmin(req, res) {
     }
 }
 
+function hasRead(req, res) {
+    if (req.session.user && req.session.user.read) {
+        return true
+    } else {
+        res.sendStatus(403)
+        return false
+    }
+}
+
+function get(query = {}, offset = 0, limit = 100) {
+    try {
+        if (typeof query === 'string') {
+            query = JSON.parse(query)
+        }
+    } catch (error) {
+        query = {}
+    }
+    console.log(query)
+    console.log(offset)
+    console.log(limit)
+    return new Promise(async (res, rej) => {
+        const cursor = this.find(query).skip(offset).limit(limit).cursor()
+        const items = []
+        for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
+            items.push(doc)
+        }
+        await this.countDocuments(query, async function (err, count) {
+            if (err) {
+                rej(err)
+            } else {
+                res({
+                    total: count,
+                    offset: offset,
+                    limit: limit,
+                    data: items
+                })
+            }
+        })
+    })
+}
+
+async function query(ctx, res, query, offset, limit) {
+    let item;
+    try {
+        item = (await ctx.get(query, offset, limit));
+    } catch (error) { }
+    if (isValidItem(item, res)) {
+        return res.send(item);
+    }
+}
+
 export default {
-    isValidItem: isValidItem,
-    isAuthorized: isAuthorized,
-    isAdmin: isAdmin
+    isValidItem,
+    isAuthorized,
+    isAdmin,
+    hasRead,
+    get,
+    query
 }

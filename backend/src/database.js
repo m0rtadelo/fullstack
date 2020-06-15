@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect(`mongodb://user:password@${process.env.DB_HOST || 'localhost'}/fullstack`, {useNewUrlParser: true});
+mongoose.connect(`mongodb://user:password@${process.env.DB_HOST || 'localhost'}/fullstack`, {useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

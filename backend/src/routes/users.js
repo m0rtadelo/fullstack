@@ -4,26 +4,11 @@ import utils from '../utils';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    return res.send(Object.values(await req.context.models.users.get()));
+  return await utils.query(req.context.models.users, res, req.query.query, req.query.offset, req.query.limit)
 });
 
-router.post('/', async (req, res) => {
-    let item;
-    try {
-      item = Object.values(await req.context.models.users.find(req.body));
-    } catch (error) {}
-    if(utils.isValidItem(item, res)) {
-      return res.send(item);
-    }
-})
 router.get('/:userId', async (req, res) => {
-    let item;
-    try {
-      item = Object.values(await req.context.models.users.get(req.params.userId))[0];
-    } catch (error) {}
-    if(utils.isValidItem(item, res)) {
-      return res.send(item);
-    }
+  return await utils.query(req.context.models.users, res, {_id: req.params.userId }, req.query.offset, req.query.limit)
 });
 
 export default router;
