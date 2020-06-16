@@ -1,7 +1,7 @@
-import Users from './users';
-import Items from './items';
+import Users from './users'
+import Items from './items'
 
 export default {
-  users:Users,
-  items:Items
+  users: Users,
+  items: Items
 }
