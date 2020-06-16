@@ -16,12 +16,13 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   let item
   try {
-    item = ((await req.context.models.users.login({ user: req.body.user }))[0])
-  } catch (error) {}
+    item = ((await req.context.models.users.login({ user: req.body.user, pwd: req.body.pwd }))[0])
+  } catch (error) {
+    res.statusCode(500)
+  }
   if (item) {
-    const { pwd, ...user } = JSON.parse(JSON.stringify(item))
-    req.session.user = user
-    return res.send(user)
+    req.session.user = item
+    return res.send(item)
   }
   return res.sendStatus(401)
 })

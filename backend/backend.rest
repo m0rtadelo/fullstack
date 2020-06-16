@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "user": "admin",
-    "password": "1234"
+    "pwd": "1234"
 }
 
 ###
@@ -13,7 +13,7 @@ DELETE http://localhost:3000/login
 GET http://localhost:3000/users
 
 ###
-GET http://localhost:3000/users?query={"user":"user"}
+GET http://localhost:3000/users?query={"read":true}&limit=2&offset=2
 
 ###
 GET http://localhost:3000/users/5ee79603c6ceac6bacc70964
@@ -28,7 +28,7 @@ GET http://localhost:3000/items?query={"name":"House"}
 GET http://localhost:3000/items/5ee79603c6ceac6bacc70964
 
 
-###const
+###
 GET http://localhost:3000/items/5ee79604c6ceac6bacc7096a
           
 ###

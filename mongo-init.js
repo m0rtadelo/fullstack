@@ -11,7 +11,7 @@ db.createUser(
         ]
     }
 );
-
+/*
 db.system.js.save(
 {
     _id: "getPaginated",
@@ -55,12 +55,13 @@ function getValueTables() {
         data: db.valueTables.aggregate([{$project:{name:1, items:{ $cond: { if: { $isArray: "$data" }, then: { $size: "$data" }, else: "NA"} }}}]).toArray()
     }
 }
+*/
 // Application users
 db.users.insertMany([
-    { user: "admin", pwd: "1234", admin: true, read: true, write: true },
-    { user: "user", pwd: "1234", admin: false, read: true, write: true },
-    { user: "ro", pwd: "1234", admin: false, read: true, write: false },
-    { user: "no", pwd: "1234", admin: false, read: false, write: false }
+    { user: "admin", pwd: "1234", email: "email@domain.com", admin: true, read: true, write: true },
+    { user: "user", pwd: "1234", email: "some@domain.com", admin: false, read: true, write: true },
+    { user: "ro", pwd: "1234", email: "false@domain.com", admin: false, read: true, write: false },
+    { user: "no", pwd: "1234", email: "unused@domain.com", admin: false, read: false, write: false }
 ]);
 
 // Value tables

@@ -1,7 +1,9 @@
 import mongoose from '../database.js'
 import utils from '../utils'
 
-var userSchema = new mongoose.Schema({})
+var userSchema = new mongoose.Schema({
+  pwd: { type: String, default: null, select: false }
+})
 userSchema.statics.get = utils.get
 
 var db = mongoose.model('users', userSchema)
