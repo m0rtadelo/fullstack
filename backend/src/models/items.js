@@ -1,15 +1,14 @@
 import mongoose from '../database.js'
 import utils from '../utils'
 
-var itemSchema = new mongoose.Schema({})
+const itemSchema = new mongoose.Schema({}, { collection: 'items' })
 itemSchema.statics.get = utils.get
 
-var db = mongoose.model('items', itemSchema)
+const items = mongoose.model('items', itemSchema)
 
 const Items = {
   get: async (query, offset, limit, singleItem) => {
-    console.log('item get')
-    return await db.get(query, offset, limit, singleItem)
+    return await items.get(query, offset, limit, singleItem)
   }
 }
 

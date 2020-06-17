@@ -64,8 +64,13 @@ db.users.insertMany([
     { user: "no", pwd: "1234", email: "unused@domain.com", admin: false, read: false, write: false }
 ]);
 
+// test
+db.values.insertMany([
+    {   name: "genders"    },
+    {   name: "countries" }
+]);
 // Value tables
-db.valueTables.insertMany([
+db.vt.insertMany([
     {   name: "genders",
         data: [
             { "name": "Male", "code": "M"},
